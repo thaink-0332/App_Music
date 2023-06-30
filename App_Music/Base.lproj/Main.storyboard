@@ -37,18 +37,56 @@
                                 <color key="textColor" systemColor="secondarySystemBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFv-Ov-Cs0">
+                                <rect key="frame" x="273" y="579" width="57" height="37"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.right.to.line" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="19" weight="heavy"/>
+                                    <color key="baseForegroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                </buttonConfiguration>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="wBf-9a-UJR">
+                                <rect key="frame" x="61" y="494" width="271" height="31"/>
+                                <color key="tintColor" systemColor="opaqueSeparatorColor"/>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jzi-Wk-FrV">
+                                <rect key="frame" x="158" y="569" width="77" height="56"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="pause.circle.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="35"/>
+                                    <color key="baseForegroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5u-Vd-qID">
+                                <rect key="frame" x="63" y="579" width="57" height="37"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.left.to.line" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="19" weight="heavy"/>
+                                    <color key="baseForegroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wBf-9a-UJR" secondAttribute="trailing" constant="63" id="1jH-jp-Hz6"/>
                             <constraint firstItem="Sld-Gh-TVo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2pe-0Z-6bU"/>
                             <constraint firstItem="Sld-Gh-TVo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="5Pm-VT-T0P"/>
                             <constraint firstItem="old-Z2-5mD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Aqw-Ia-74x"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XmI-C2-a7d" secondAttribute="trailing" constant="20" id="DwA-Tw-X9c"/>
                             <constraint firstItem="Sld-Gh-TVo" firstAttribute="top" secondItem="XmI-C2-a7d" secondAttribute="bottom" constant="40" id="Sox-UO-Q1p"/>
+                            <constraint firstItem="wBf-9a-UJR" firstAttribute="top" secondItem="old-Z2-5mD" secondAttribute="bottom" constant="37" id="TfS-hq-dH2"/>
                             <constraint firstItem="old-Z2-5mD" firstAttribute="top" secondItem="Sld-Gh-TVo" secondAttribute="bottom" constant="25" id="Tfe-pJ-KLq"/>
+                            <constraint firstItem="Jzi-Wk-FrV" firstAttribute="leading" secondItem="y5u-Vd-qID" secondAttribute="trailing" constant="38" id="U42-v4-eEe"/>
+                            <constraint firstItem="rFv-Ov-Cs0" firstAttribute="leading" secondItem="Jzi-Wk-FrV" secondAttribute="trailing" constant="38" id="W2h-af-If5"/>
+                            <constraint firstItem="y5u-Vd-qID" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="63" id="XaC-t4-Ltf"/>
                             <constraint firstItem="XmI-C2-a7d" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="46" id="YEp-LP-YSX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rFv-Ov-Cs0" secondAttribute="trailing" constant="63" id="ZUw-Y4-qfu"/>
                             <constraint firstItem="old-Z2-5mD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="c6S-mt-ALR"/>
+                            <constraint firstItem="rFv-Ov-Cs0" firstAttribute="top" secondItem="wBf-9a-UJR" secondAttribute="bottom" constant="55" id="cB2-RV-Gxw"/>
+                            <constraint firstItem="Jzi-Wk-FrV" firstAttribute="top" secondItem="wBf-9a-UJR" secondAttribute="bottom" constant="45" id="cBG-d3-jiF"/>
+                            <constraint firstItem="wBf-9a-UJR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="63" id="cqd-dv-6kJ"/>
+                            <constraint firstItem="y5u-Vd-qID" firstAttribute="top" secondItem="wBf-9a-UJR" secondAttribute="bottom" constant="55" id="hcb-l3-vFe"/>
                             <constraint firstItem="XmI-C2-a7d" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="j7T-fU-NG9"/>
                             <constraint firstItem="XmI-C2-a7d" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="vT0-01-p3s"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="old-Z2-5mD" secondAttribute="bottom" constant="361" id="wRc-d8-gaR"/>
@@ -61,8 +99,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.left.to.line" catalog="system" width="128" height="88"/>
+        <image name="arrow.right.to.line" catalog="system" width="128" height="88"/>
+        <image name="pause.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
