@@ -12,10 +12,10 @@ class ViewController: UIViewController {
     @IBOutlet var song_artist: UILabel!
     @IBOutlet var song_image: UIImageView!
     @IBOutlet var play_time: UISlider!
-    var currentSongIndex: Int = 0
-    var currentTimeLine: Float = 0.0
-    var isPlaying : Bool = false
-    var songLibrary:[Song] = []
+    var currentSongIndex = 0
+    var currentTimeLine = 0.0
+    var isPlaying = false
+    var songLibrary: [Song] = []
     var timer: Timer?
     var player:AVAudioPlayer!
     var lastPlaybackTime: Double?
