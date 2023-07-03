@@ -51,6 +51,9 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="wBf-9a-UJR">
                                 <rect key="frame" x="61" y="494" width="271" height="31"/>
                                 <color key="tintColor" systemColor="opaqueSeparatorColor"/>
+                                <connections>
+                                    <action selector="slideTimeLine" destination="BYZ-38-t0r" eventType="touchDragInside" id="dr9-1H-fA2"/>
+                                </connections>
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jzi-Wk-FrV">
                                 <rect key="frame" x="158" y="569" width="77" height="56"/>
