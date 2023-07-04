@@ -1,15 +1,7 @@
 import AVFoundation
 import UIKit
 
-enum Constants: String{
-    case lastPlaybackTime = "LastPlaybackTime"
-    case lastSongIndex    = "LastSongIndex"
-    case mp3              = "mp3"
-    case jpg              = "jpg"
-}
-
 final class ViewController: UIViewController {
-    
     @IBOutlet private weak var playButton: UIButton!
     @IBOutlet private weak var nextButton: UIButton!
     @IBOutlet private weak var previousButton: UIButton!
@@ -29,40 +21,29 @@ final class ViewController: UIViewController {
     private var mp3 = Constants.mp3.rawValue
     private var jpg = Constants.jpg.rawValue
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         createSongLibrary()
         initLastPlayedSong()
-        
     }
-    
-    
     
     @IBAction private func tapPlayButton() { 
         isPlaying ? pauseSong() : playSong()
     }
-    
     
     @IBAction private func tapNextButton() {
         let numberOfSongs = songLibrary.count - 1
         currentSongIndex = currentSongIndex < numberOfSongs ? currentSongIndex + 1 : 0
         currentTimeLine = 0
         initNewSong()
-        
     }
-    
     
     @IBAction private func tapPreviousButton() {
         let numberOfSongs = songLibrary.count - 1
         currentSongIndex = currentSongIndex > 0 ? currentSongIndex - 1 : numberOfSongs
         currentTimeLine = 0
         initNewSong()
-        
     }
-    
     
     @IBAction private func slideTimeLine() {
         isPlaying = true;
@@ -70,10 +51,7 @@ final class ViewController: UIViewController {
         player.currentTime = Double(playTime.value)
         playButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
         player.play()
-        
-        
     }
-    
     
     private func playSong() {
         isPlaying = true;
@@ -89,7 +67,6 @@ final class ViewController: UIViewController {
             playTime.value = Float(lastPlaybackTime)
             player.currentTime = lastPlaybackTime
             player.play()
-            
         }
         catch {
             
@@ -130,10 +107,9 @@ final class ViewController: UIViewController {
             UserDefaults.standard.set(currentSongIndex, forKey: lastSongIndexKey)
             isPlaying = true
             player?.play()
-            
         }
         catch {
-            
+
         }
     }
     
@@ -152,7 +128,6 @@ final class ViewController: UIViewController {
             let lastPlaybackTime = UserDefaults.standard.object(forKey: lastPlaybackTimeKey) as? Double
             playTime.value = lastPlaybackTime != nil ? Float(lastPlaybackTime!) : 0
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
-            
         }
         catch {
             
@@ -164,7 +139,6 @@ final class ViewController: UIViewController {
             let image = UIImage(named: imagePath)
             songLibrary.append(Song(name: name, image: image!, artist: artist, songFile: songFile))
         } else { return }
-        
     }
     
     private func createSongLibrary() {
@@ -173,7 +147,5 @@ final class ViewController: UIViewController {
         addNewSong(name: "Waiting for you", imgName: "WaitingForYouImg",type:jpg, artist: "MONO", songFile: "WaitingForYou")
         
         addNewSong(name: "Nơi này có anh", imgName: "NoiNayCoAnhImg",type:jpg, artist: "Sơn Tùng", songFile: "NoiNayCoAnh")
-        
     }
-    
 }
