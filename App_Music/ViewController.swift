@@ -1,9 +1,11 @@
 import AVFoundation
 import UIKit
 
-enum UserHistory: String{
+enum Constants: String{
     case lastPlaybackTime = "LastPlaybackTime"
     case lastSongIndex    = "LastSongIndex"
+    case mp3              = "mp3"
+    case jpg              = "jpg"
 }
 
 final class ViewController: UIViewController {
@@ -22,8 +24,10 @@ final class ViewController: UIViewController {
     private var timer: Timer?
     private var player:AVAudioPlayer!
     private var lastPlaybackTime: Double?
-    private var lastPlaybackTimeKey = UserHistory.lastPlaybackTime.rawValue
-    private var lastSongIndexKey = UserHistory.lastSongIndex.rawValue
+    private var lastPlaybackTimeKey = Constants.lastPlaybackTime.rawValue
+    private var lastSongIndexKey = Constants.lastSongIndex.rawValue
+    private var mp3 = Constants.mp3.rawValue
+    private var jpg = Constants.jpg.rawValue
     
     
     
@@ -37,12 +41,12 @@ final class ViewController: UIViewController {
     
     
     
-    @IBAction func tapPlayButton(){
+    @IBAction private func tapPlayButton(){
         isPlaying ? pauseSong() : playSong()
     }
     
     
-    @IBAction func tapNextButton(){
+    @IBAction private func tapNextButton(){
         let numberOfSongs = songLibrary.count - 1
         currentSongIndex = currentSongIndex < numberOfSongs ? currentSongIndex + 1 : 0
         currentTimeLine = 0
@@ -51,7 +55,7 @@ final class ViewController: UIViewController {
     }
     
     
-    @IBAction func tapPreviousButton(){
+    @IBAction private func tapPreviousButton(){
         let numberOfSongs = songLibrary.count - 1
         currentSongIndex = currentSongIndex > 0 ? currentSongIndex - 1 : numberOfSongs
         currentTimeLine = 0
@@ -60,7 +64,7 @@ final class ViewController: UIViewController {
     }
     
     
-    @IBAction func slideTimeLine(){
+    @IBAction private func slideTimeLine(){
         isPlaying = true;
         currentTimeLine = playTime.value
         player.currentTime = Double(playTime.value)
@@ -71,10 +75,10 @@ final class ViewController: UIViewController {
     }
     
     
-    func playSong(){
+    private func playSong(){
         isPlaying = true;
-        let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: "mp3")
-        do{
+        let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: mp3)
+        do {
             try AVAudioSession.sharedInstance().setMode(.default)
             try AVAudioSession.sharedInstance().setActive(true)
             guard let urlString = urlString else{
@@ -94,8 +98,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    
-    func pauseSong(){
+    private func pauseSong(){
         isPlaying = false
         playButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
         currentTimeLine = Float(player.currentTime)
@@ -104,18 +107,16 @@ final class ViewController: UIViewController {
         player.pause()
     }
     
-    
-    @objc func updateSlider() {
+    @objc private func updateSlider() {
         if isPlaying{
             playTime.value = Float(player.currentTime)
             UserDefaults.standard.set(Float(player.currentTime), forKey: lastPlaybackTimeKey)
         }
     }
     
-    
     private func initNewSong(){
         let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: "mp3")
-        do{
+        do {
             try AVAudioSession.sharedInstance().setMode(.default)
             try AVAudioSession.sharedInstance().setActive(true)
             guard let urlString = urlString else{
@@ -140,17 +141,11 @@ final class ViewController: UIViewController {
         }
     }
     
-    
     private func initLastPlayedSong(){
-        do
-        {   let lastSongIndex = UserDefaults.standard.object(forKey: lastSongIndexKey) as? Int
-            if lastSongIndex != nil{
-                currentSongIndex = lastSongIndex!
-            }
-            else{
-                currentSongIndex = 0
-            }
-            let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: "mp3")
+        do { 
+            let lastSongIndex = UserDefaults.standard.object(forKey: lastSongIndexKey) as? Int
+            currentSongIndex = lastSongIndex != nil ? lastSongIndex! : 0
+            let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: mp3)
             guard let urlString = urlString else{
                 return
             }
@@ -161,13 +156,7 @@ final class ViewController: UIViewController {
             playButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
             playTime.maximumValue = Float(player.duration)
             let lastPlaybackTime = UserDefaults.standard.object(forKey: lastPlaybackTimeKey) as? Double
-            if lastPlaybackTime != nil {
-                playTime.value = Float(lastPlaybackTime!)
-                
-            }
-            else { playTime.value = 0
-                
-            }
+            playTime.value = lastPlaybackTime != nil ? Float(lastPlaybackTime!) : 0
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
             
         }
@@ -175,7 +164,6 @@ final class ViewController: UIViewController {
             
         }
     }
-    
     
     private func addNewSong(name: String, imgName: String, type: String, artist: String, songFile: String){
         if let imagePath = Bundle.main.path(forResource: imgName, ofType: type) {
@@ -187,23 +175,13 @@ final class ViewController: UIViewController {
         
     }
     
-    
     private func createSongLibrary(){
-        addNewSong(name: "Em của ngày hôm qua", imgName: "EmCuaNgayHomQuaImg",type:"jpg", artist: "Sơn Tùng", songFile: "EmCuaNgayHomQua")
+        addNewSong(name: "Em của ngày hôm qua", imgName: "EmCuaNgayHomQuaImg",type:jpg, artist: "Sơn Tùng", songFile: "EmCuaNgayHomQua")
         
-        addNewSong(name: "Waiting for you", imgName: "WaitingForYouImg",type:"jpg", artist: "MONO", songFile: "WaitingForYou")
+        addNewSong(name: "Waiting for you", imgName: "WaitingForYouImg",type:jpg, artist: "MONO", songFile: "WaitingForYou")
         
-        addNewSong(name: "Nơi này có anh", imgName: "NoiNayCoAnhImg",type:"jpg", artist: "Sơn Tùng", songFile: "NoiNayCoAnh")
+        addNewSong(name: "Nơi này có anh", imgName: "NoiNayCoAnhImg",type:jpg, artist: "Sơn Tùng", songFile: "NoiNayCoAnh")
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
