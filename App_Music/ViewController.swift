@@ -41,12 +41,12 @@ final class ViewController: UIViewController {
     
     
     
-    @IBAction private func tapPlayButton(){
+    @IBAction private func tapPlayButton() { 
         isPlaying ? pauseSong() : playSong()
     }
     
     
-    @IBAction private func tapNextButton(){
+    @IBAction private func tapNextButton() {
         let numberOfSongs = songLibrary.count - 1
         currentSongIndex = currentSongIndex < numberOfSongs ? currentSongIndex + 1 : 0
         currentTimeLine = 0
@@ -55,7 +55,7 @@ final class ViewController: UIViewController {
     }
     
     
-    @IBAction private func tapPreviousButton(){
+    @IBAction private func tapPreviousButton() {
         let numberOfSongs = songLibrary.count - 1
         currentSongIndex = currentSongIndex > 0 ? currentSongIndex - 1 : numberOfSongs
         currentTimeLine = 0
@@ -64,7 +64,7 @@ final class ViewController: UIViewController {
     }
     
     
-    @IBAction private func slideTimeLine(){
+    @IBAction private func slideTimeLine() {
         isPlaying = true;
         currentTimeLine = playTime.value
         player.currentTime = Double(playTime.value)
@@ -75,7 +75,7 @@ final class ViewController: UIViewController {
     }
     
     
-    private func playSong(){
+    private func playSong() {
         isPlaying = true;
         let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: mp3)
         do {
@@ -93,12 +93,12 @@ final class ViewController: UIViewController {
             player.play()
             
         }
-        catch{
+        catch {
             
         }
     }
     
-    private func pauseSong(){
+    private func pauseSong() { 
         isPlaying = false
         playButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
         currentTimeLine = Float(player.currentTime)
@@ -108,13 +108,13 @@ final class ViewController: UIViewController {
     }
     
     @objc private func updateSlider() {
-        if isPlaying{
+        if isPlaying {
             playTime.value = Float(player.currentTime)
             UserDefaults.standard.set(Float(player.currentTime), forKey: lastPlaybackTimeKey)
         }
     }
     
-    private func initNewSong(){
+    private func initNewSong() {
         let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: "mp3")
         do {
             try AVAudioSession.sharedInstance().setMode(.default)
@@ -136,12 +136,12 @@ final class ViewController: UIViewController {
             player?.play()
             
         }
-        catch{
+        catch {
             
         }
     }
     
-    private func initLastPlayedSong(){
+    private func initLastPlayedSong() {
         do { 
             let lastSongIndex = UserDefaults.standard.object(forKey: lastSongIndexKey) as? Int
             currentSongIndex = lastSongIndex != nil ? lastSongIndex! : 0
@@ -160,12 +160,12 @@ final class ViewController: UIViewController {
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
             
         }
-        catch{
+        catch {
             
         }
     }
     
-    private func addNewSong(name: String, imgName: String, type: String, artist: String, songFile: String){
+    private func addNewSong(name: String, imgName: String, type: String, artist: String, songFile: String) {
         if let imagePath = Bundle.main.path(forResource: imgName, ofType: type) {
             let image = UIImage(named: imagePath)
             songLibrary.append(Song(name: name, image: image!, artist: artist, songFile: songFile))
@@ -175,7 +175,7 @@ final class ViewController: UIViewController {
         
     }
     
-    private func createSongLibrary(){
+    private func createSongLibrary() {
         addNewSong(name: "Em của ngày hôm qua", imgName: "EmCuaNgayHomQuaImg",type:jpg, artist: "Sơn Tùng", songFile: "EmCuaNgayHomQua")
         
         addNewSong(name: "Waiting for you", imgName: "WaitingForYouImg",type:jpg, artist: "MONO", songFile: "WaitingForYou")
