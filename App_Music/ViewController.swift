@@ -6,24 +6,24 @@ enum UserHistory: String{
     case lastSongIndex    = "LastSongIndex"
 }
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
-    @IBOutlet var playButton: UIButton!
-    @IBOutlet var nextButton: UIButton!
-    @IBOutlet var previousButton: UIButton!
-    @IBOutlet var songName: UILabel!
-    @IBOutlet var songArtist: UILabel!
-    @IBOutlet var songImage: UIImageView!
-    @IBOutlet var playTime: UISlider!
-    var currentSongIndex: Int = 0
-    var currentTimeLine: Float = 0.0
-    var isPlaying : Bool = false
-    var songLibrary:[Song] = []
-    var timer: Timer?
-    var player:AVAudioPlayer!
-    var lastPlaybackTime: Double?
-    var lastPlaybackTimeKey = UserHistory.lastPlaybackTime.rawValue
-    var lastSongIndexKey = UserHistory.lastSongIndex.rawValue
+    @IBOutlet private weak var playButton: UIButton!
+    @IBOutlet private weak var nextButton: UIButton!
+    @IBOutlet private weak var previousButton: UIButton!
+    @IBOutlet private weak var songName: UILabel!
+    @IBOutlet private weak var songArtist: UILabel!
+    @IBOutlet private weak var songImage: UIImageView!
+    @IBOutlet private weak var playTime: UISlider!
+    private var currentSongIndex: Int = 0
+    private var currentTimeLine: Float = 0.0
+    private var isPlaying : Bool = false
+    private var songLibrary:[Song] = []
+    private var timer: Timer?
+    private var player:AVAudioPlayer!
+    private var lastPlaybackTime: Double?
+    private var lastPlaybackTimeKey = UserHistory.lastPlaybackTime.rawValue
+    private var lastSongIndexKey = UserHistory.lastSongIndex.rawValue
     
     
     
@@ -38,17 +38,13 @@ class ViewController: UIViewController {
     
     
     @IBAction func tapPlayButton(){
-        if isPlaying {
-            pauseSong()
-        }
-        else{
-            playSong()
-        }
+        isPlaying ? pauseSong() : playSong()
     }
     
     
     @IBAction func tapNextButton(){
-        currentSongIndex = currentSongIndex < songLibrary.count - 1 ? currentSongIndex + 1 : 0
+        let numberOfSongs = songLibrary.count - 1
+        currentSongIndex = currentSongIndex < numberOfSongs ? currentSongIndex + 1 : 0
         currentTimeLine = 0
         initNewSong()
         
@@ -56,7 +52,8 @@ class ViewController: UIViewController {
     
     
     @IBAction func tapPreviousButton(){
-        currentSongIndex = currentSongIndex > 0 ? currentSongIndex - 1 : songLibrary.count - 1
+        let numberOfSongs = songLibrary.count - 1
+        currentSongIndex = currentSongIndex > 0 ? currentSongIndex - 1 : numberOfSongs
         currentTimeLine = 0
         initNewSong()
         
@@ -116,7 +113,7 @@ class ViewController: UIViewController {
     }
     
     
-    func initNewSong(){
+    private func initNewSong(){
         let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: "mp3")
         do{
             try AVAudioSession.sharedInstance().setMode(.default)
@@ -144,7 +141,7 @@ class ViewController: UIViewController {
     }
     
     
-    func initLastPlayedSong(){
+    private func initLastPlayedSong(){
         do
         {   let lastSongIndex = UserDefaults.standard.object(forKey: lastSongIndexKey) as? Int
             if lastSongIndex != nil{
@@ -180,7 +177,7 @@ class ViewController: UIViewController {
     }
     
     
-    func addNewSong(name: String, imgName: String, type: String, artist: String, songFile: String){
+    private func addNewSong(name: String, imgName: String, type: String, artist: String, songFile: String){
         if let imagePath = Bundle.main.path(forResource: imgName, ofType: type) {
             let image = UIImage(named: imagePath)
             songLibrary.append(Song(name: name, image: image!, artist: artist, songFile: songFile))
@@ -191,7 +188,7 @@ class ViewController: UIViewController {
     }
     
     
-    func createSongLibrary(){
+    private func createSongLibrary(){
         addNewSong(name: "Em của ngày hôm qua", imgName: "EmCuaNgayHomQuaImg",type:"jpg", artist: "Sơn Tùng", songFile: "EmCuaNgayHomQua")
         
         addNewSong(name: "Waiting for you", imgName: "WaitingForYouImg",type:"jpg", artist: "MONO", songFile: "WaitingForYou")
