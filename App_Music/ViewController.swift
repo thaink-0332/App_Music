@@ -81,9 +81,7 @@ final class ViewController: UIViewController {
         do {
             try AVAudioSession.sharedInstance().setMode(.default)
             try AVAudioSession.sharedInstance().setActive(true)
-            guard let urlString = urlString else{
-                return
-            }
+            guard let urlString = urlString else { return }
             player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: urlString))
             playButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
             playTime.maximumValue = Float(player.duration)
@@ -119,9 +117,7 @@ final class ViewController: UIViewController {
         do {
             try AVAudioSession.sharedInstance().setMode(.default)
             try AVAudioSession.sharedInstance().setActive(true)
-            guard let urlString = urlString else{
-                return
-            }
+            guard let urlString = urlString else { return }
             player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: urlString))
             songName.text = songLibrary[currentSongIndex].songName
             songArtist.text = songLibrary[currentSongIndex].songArtist
@@ -146,9 +142,7 @@ final class ViewController: UIViewController {
             let lastSongIndex = UserDefaults.standard.object(forKey: lastSongIndexKey) as? Int
             currentSongIndex = lastSongIndex != nil ? lastSongIndex! : 0
             let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: mp3)
-            guard let urlString = urlString else{
-                return
-            }
+            guard let urlString = urlString else { return }
             player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: urlString))
             songName.text = songLibrary[currentSongIndex].songName
             songArtist.text = songLibrary[currentSongIndex].songArtist
@@ -169,9 +163,7 @@ final class ViewController: UIViewController {
         if let imagePath = Bundle.main.path(forResource: imgName, ofType: type) {
             let image = UIImage(named: imagePath)
             songLibrary.append(Song(name: name, image: image!, artist: artist, songFile: songFile))
-        } else {
-            return
-        }
+        } else { return }
         
     }
     
