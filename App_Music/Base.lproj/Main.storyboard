@@ -51,6 +51,9 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="wBf-9a-UJR">
                                 <rect key="frame" x="61" y="494" width="271" height="31"/>
                                 <color key="tintColor" systemColor="opaqueSeparatorColor"/>
+                                <connections>
+                                    <action selector="slideTimeLine" destination="BYZ-38-t0r" eventType="touchDragInside" id="dr9-1H-fA2"/>
+                                </connections>
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jzi-Wk-FrV">
                                 <rect key="frame" x="158" y="569" width="77" height="56"/>
@@ -102,13 +105,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="next_button" destination="rFv-Ov-Cs0" id="aMd-xg-g8K"/>
-                        <outlet property="play_button" destination="Jzi-Wk-FrV" id="9f8-Qx-pXn"/>
-                        <outlet property="play_time" destination="wBf-9a-UJR" id="lPs-3O-jKh"/>
-                        <outlet property="previous_button" destination="y5u-Vd-qID" id="6Jx-i6-Mq7"/>
-                        <outlet property="song_artist" destination="old-Z2-5mD" id="mMM-67-o8e"/>
-                        <outlet property="song_image" destination="XmI-C2-a7d" id="CiV-cm-Hx3"/>
-                        <outlet property="song_name" destination="Sld-Gh-TVo" id="cd4-EF-ceN"/>
+                        <outlet property="nextButton" destination="rFv-Ov-Cs0" id="LrB-cZ-HdL"/>
+                        <outlet property="playButton" destination="Jzi-Wk-FrV" id="nh9-bb-JoZ"/>
+                        <outlet property="playTime" destination="wBf-9a-UJR" id="RQk-LJ-c9p"/>
+                        <outlet property="previousButton" destination="y5u-Vd-qID" id="Evf-z6-KC5"/>
+                        <outlet property="songArtist" destination="old-Z2-5mD" id="7i5-iI-nPG"/>
+                        <outlet property="songImage" destination="XmI-C2-a7d" id="usW-65-wf3"/>
+                        <outlet property="songName" destination="Sld-Gh-TVo" id="QaS-vj-0va"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
