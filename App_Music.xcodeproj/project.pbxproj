@@ -13,8 +13,11 @@
 		E42E9DED2A4D7F3A00646494 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E42E9DEB2A4D7F3A00646494 /* Main.storyboard */; };
 		E42E9DEF2A4D7F3A00646494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E42E9DEE2A4D7F3A00646494 /* Assets.xcassets */; };
 		E42E9DF22A4D7F3A00646494 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E42E9DF02A4D7F3A00646494 /* LaunchScreen.storyboard */; };
+		E43D5D4E2A54775700C88ED1 /* LibraryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43D5D4D2A54775700C88ED1 /* LibraryVC.swift */; };
+		E43D5D502A5487BC00C88ED1 /* CustomSongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43D5D4F2A5487BC00C88ED1 /* CustomSongCell.swift */; };
 		E457C02A2A4ED1E300F1D55A /* EmCuaNgayHomQua.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E457C0292A4ED1E300F1D55A /* EmCuaNgayHomQua.mp3 */; };
 		E48855832A52CB8000378CF3 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48855822A52CB8000378CF3 /* Song.swift */; };
+		E48BE1462A54223E00B67CDF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48BE1452A54223E00B67CDF /* Constants.swift */; };
 		E4C02B442A51DAD7007A6300 /* NoiNayCoAnh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4C02B432A51DAD7007A6300 /* NoiNayCoAnh.mp3 */; };
 		E4C02B4C2A51DE08007A6300 /* WaitingForYou.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4C02B4B2A51DE08007A6300 /* WaitingForYou.mp3 */; };
 		E4C02B4E2A51E826007A6300 /* WaitingForYouImg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E4C02B4D2A51E826007A6300 /* WaitingForYouImg.jpg */; };
@@ -31,8 +34,11 @@
 		E42E9DEE2A4D7F3A00646494 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E42E9DF12A4D7F3A00646494 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E42E9DF32A4D7F3A00646494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E43D5D4D2A54775700C88ED1 /* LibraryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryVC.swift; sourceTree = "<group>"; };
+		E43D5D4F2A5487BC00C88ED1 /* CustomSongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSongCell.swift; sourceTree = "<group>"; };
 		E457C0292A4ED1E300F1D55A /* EmCuaNgayHomQua.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = EmCuaNgayHomQua.mp3; sourceTree = "<group>"; };
 		E48855822A52CB8000378CF3 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		E48BE1452A54223E00B67CDF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E4C02B432A51DAD7007A6300 /* NoiNayCoAnh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NoiNayCoAnh.mp3; sourceTree = "<group>"; };
 		E4C02B4B2A51DE08007A6300 /* WaitingForYou.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = WaitingForYou.mp3; sourceTree = "<group>"; };
 		E4C02B4D2A51E826007A6300 /* WaitingForYouImg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WaitingForYouImg.jpg; sourceTree = "<group>"; };
@@ -78,12 +84,15 @@
 				E4C02B512A51E835007A6300 /* NoiNayCoAnhImg.jpg */,
 				E42E9DE52A4D7F3A00646494 /* AppDelegate.swift */,
 				E42E9DE72A4D7F3A00646494 /* SceneDelegate.swift */,
+				E43D5D4D2A54775700C88ED1 /* LibraryVC.swift */,
 				E42E9DE92A4D7F3A00646494 /* ViewController.swift */,
 				E42E9DEB2A4D7F3A00646494 /* Main.storyboard */,
 				E42E9DEE2A4D7F3A00646494 /* Assets.xcassets */,
 				E42E9DF02A4D7F3A00646494 /* LaunchScreen.storyboard */,
 				E42E9DF32A4D7F3A00646494 /* Info.plist */,
+				E43D5D4F2A5487BC00C88ED1 /* CustomSongCell.swift */,
 				E48855822A52CB8000378CF3 /* Song.swift */,
+				E48BE1452A54223E00B67CDF /* Constants.swift */,
 			);
 			path = App_Music;
 			sourceTree = "<group>";
@@ -165,7 +174,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E43D5D502A5487BC00C88ED1 /* CustomSongCell.swift in Sources */,
+				E48BE1462A54223E00B67CDF /* Constants.swift in Sources */,
 				E48855832A52CB8000378CF3 /* Song.swift in Sources */,
+				E43D5D4E2A54775700C88ED1 /* LibraryVC.swift in Sources */,
 				E42E9DEA2A4D7F3A00646494 /* ViewController.swift in Sources */,
 				E42E9DE62A4D7F3A00646494 /* AppDelegate.swift in Sources */,
 				E42E9DE82A4D7F3A00646494 /* SceneDelegate.swift in Sources */,

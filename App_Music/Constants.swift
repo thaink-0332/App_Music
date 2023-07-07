@@ -5,4 +5,5 @@ enum Constants: String{
     case lastSongIndex    = "LastSongIndex"
     case mp3              = "mp3"
     case jpg              = "jpg"
+    case toSongVCSegue    = "ToSongVC"
 }
