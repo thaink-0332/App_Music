@@ -1,5 +1,6 @@
 import AVFoundation
 import UIKit
+import MediaPlayer
 
 final class ViewController: UIViewController {
     @IBOutlet private weak var playButton: UIButton!
@@ -25,7 +26,12 @@ final class ViewController: UIViewController {
         initLastPlayedSong()
     }
     
-    @IBAction private func tapPlayButton() { 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        pauseSong()
+    }
+    
+    @IBAction private func tapPlayButton() {
         isPlaying ? pauseSong() : playSong()
     }
     
@@ -44,6 +50,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func slideTimeLine() {
+        player.pause()
         isPlaying = true;
         currentTimeLine = playTime.value
         player.currentTime = Double(playTime.value)
@@ -55,8 +62,6 @@ final class ViewController: UIViewController {
         isPlaying = true;
         let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: mp3)
         do {
-            try AVAudioSession.sharedInstance().setMode(.default)
-            try AVAudioSession.sharedInstance().setActive(true)
             guard let urlString = urlString else { return }
             player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: urlString))
             playButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
@@ -71,7 +76,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    private func pauseSong() { 
+    private func pauseSong() {
         isPlaying = false
         playButton.setImage(UIImage(systemName: "play.circle.fill"), for: .normal)
         currentTimeLine = Float(player.currentTime)
@@ -90,24 +95,21 @@ final class ViewController: UIViewController {
     private func initNewSong() {
         let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: mp3)
         do {
-            try AVAudioSession.sharedInstance().setMode(.default)
-            try AVAudioSession.sharedInstance().setActive(true)
             guard let urlString = urlString else { return }
             player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: urlString))
-            songName.text = songLibrary[currentSongIndex].songName
-            songArtist.text = songLibrary[currentSongIndex].songArtist
-            songImage.image = songLibrary[currentSongIndex].songImage
+            updateUIInfo()
             playButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
             playTime.maximumValue = Float(player.duration)
             UIView.animate(withDuration: 0.3) {
                 self.playTime.setValue(0, animated: true)
             }
             UserDefaults.standard.set(currentSongIndex, forKey: lastSongIndexKey)
+            updateWidgetInfo()
             isPlaying = true
             player?.play()
         }
         catch {
-
+            
         }
     }
     
@@ -118,15 +120,19 @@ final class ViewController: UIViewController {
             currentSongIndex = lastSongIndex != nil ? lastSongIndex! : 0
             let urlString = Bundle.main.path(forResource: songLibrary[currentSongIndex].songFileName, ofType: mp3)
             guard let urlString = urlString else { return }
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
             player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: urlString))
-            songName.text = songLibrary[currentSongIndex].songName
-            songArtist.text = songLibrary[currentSongIndex].songArtist
-            songImage.image = songLibrary[currentSongIndex].songImage
+            updateUIInfo()
             playButton.setImage(UIImage(systemName: "pause.circle.fill"), for: .normal)
             playTime.maximumValue = Float(player.duration)
             let lastPlaybackTime = UserDefaults.standard.object(forKey: lastPlaybackTimeKey) as? Double
             playTime.value = lastPlaybackTime != nil ? Float(lastPlaybackTime!) : 0
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+            updateWidgetInfo()
+            UIApplication.shared.beginReceivingRemoteControlEvents()
+            becomeFirstResponder()
+            player.prepareToPlay()
             player.play()
         }
         catch {
@@ -134,10 +140,44 @@ final class ViewController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-            super.viewWillDisappear(animated)
-            player.stop()
+    private func updateUIInfo(){
+        songName.text = songLibrary[currentSongIndex].songName
+        songArtist.text = songLibrary[currentSongIndex].songArtist
+        songImage.image = songLibrary[currentSongIndex].songImage
+    }
+    
+    private func updateWidgetInfo(){
+        let image = songLibrary[currentSongIndex].songImage
+        let artWork = MPMediaItemArtwork(boundsSize: image.size, requestHandler: {
+            (size) -> UIImage in return image
+        })
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: songLibrary[currentSongIndex].songName ,
+            MPMediaItemPropertyArtist: songLibrary[currentSongIndex].songArtist ,
+            MPMediaItemPropertyPlaybackDuration: player.duration,
+            MPMediaItemPropertyArtwork: artWork
+        ]
+    }
+    
+    override func remoteControlReceived(with event: UIEvent?) {
+        if let event = event {
+            if event.type == .remoteControl {
+                switch event.subtype {
+                case.remoteControlPlay:
+                    player.play()
+                case.remoteControlStop:
+                    player.stop()
+                case.remoteControlPause:
+                    player.pause()
+                case.remoteControlNextTrack:
+                    tapNextButton()
+                case.remoteControlPreviousTrack:
+                    tapPreviousButton()
+                default: break
+                }
+            }
         }
+    }
     
     func setSongLibrary(array: [Song]){
         songLibrary = array
