@@ -1,11 +1,5 @@
-//
-//  AppDelegate.swift
-//  App_Music
-//
-//  Created by Thai Nguyen Khac on 29/06/2023.
-//
-
 import UIKit
+import AVFoundation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,7 +7,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         return true
     }
 
